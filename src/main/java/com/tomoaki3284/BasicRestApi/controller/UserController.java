@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -54,6 +55,12 @@ public class UserController {
 	@PatchMapping("/users/{uid}/{newUsername}")
 	public ResponseEntity<?> updateUser(@PathVariable Long uid, @PathVariable String newUsername) {
 		userService.updateUser(uid, newUsername);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/users/{uid}")
+	public ResponseEntity<?> deleteUserById(@PathVariable Long uid) {
+		userService.deleteUserById(uid);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
