@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/api")
+@RequestMapping("/v1/users")
 public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -30,7 +30,7 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
 		return new ResponseEntity<>(
 			userService.getUserById(id),
@@ -38,7 +38,7 @@ public class UserController {
 		);
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("")
 	public ResponseEntity<List<UserDTO>> getAllUsers() {
 		List<UserDTO> userDTOS = userService.getAllUsers();
 		
@@ -48,19 +48,19 @@ public class UserController {
 		);
 	}
 	
-	@PostMapping("/users/{username}")
+	@PostMapping("/{username}")
 	public ResponseEntity<?> createUser(@PathVariable String username) {
 		userService.createUser(username);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-	@PatchMapping("/users/{uid}/{newUsername}")
+	@PatchMapping("/{uid}/{newUsername}")
 	public ResponseEntity<?> updateUser(@PathVariable Long uid, @PathVariable String newUsername) {
 		userService.updateUser(uid, newUsername);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/users/{uid}")
+	@DeleteMapping("/{uid}")
 	public ResponseEntity<?> deleteUserById(@PathVariable Long uid) {
 		userService.deleteUserById(uid);
 		return new ResponseEntity<>("success", HttpStatus.OK);
