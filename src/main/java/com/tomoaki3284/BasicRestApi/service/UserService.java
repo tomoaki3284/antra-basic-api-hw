@@ -27,9 +27,11 @@ public class UserService {
 		User user = userRepository.findById(uid).orElse(null);
 		
 		if (user == null) {
-			logger.info("user not found by id: " + uid);
+			logger.error("user not found by id: " + uid);
 			throw new RuntimeException("user not found by id: " + uid);
 		}
+		
+		logger.info("successfully fetched user by id: " + uid);
 		
 		return user;
 	}
